@@ -1,0 +1,16 @@
+#headerContainer {
+    width: 100%;
+    display: flex;
+    background-color: $tertiary;
+    justify-content: center;
+    align-items: center;
+    color: white;
+
+    h1 {
+        margin-left: auto;
+    }
+
+    h3 {
+        margin-left: auto;
+    }
+}

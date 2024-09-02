@@ -1,0 +1,16 @@
+{
+	"version": 3,
+	"file": "style.css",
+	"sources": [
+		"../SCSS/style.scss",
+		"../SCSS/partials/_variables.scss",
+		"../SCSS/partials/_header.scss"
+	],
+	"sourcesContent": [
+		"// partials import\r\n@import \"partials/variables\",\"partials/header\";",
+		"// Background Colors\r\n\r\n$primary: #141619;\r\n$secondary: #2C2E3A;\r\n$tertiary: #050A44;\r\n$quaternary: #0A21C0;\r\n$quinary: #B3B4BD;",
+		"#headerContainer {\r\n    width: 100%;\r\n    display: flex;\r\n    background-color: $tertiary;\r\n}"
+	],
+	"names": [],
+	"mappings": ";AEAA,AAAA,gBAAgB,CAAC;EACb,KAAK,EAAE,IAAI;EACX,OAAO,EAAE,IAAI;EACb,gBAAgB,EDCT,OAAO;CCAjB"
+}

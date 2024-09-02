@@ -1,0 +1,22 @@
+@mixin mq($break) {
+    @if $break == "s" {
+        @media (min-width: $break-s) {
+            @content;
+    }
+} 
+    @else if $break == "m" {
+        @media (min-width: $break-m) {
+            @content;
+    }
+}
+    @else if $break == "l" {
+        @media (min-width: $break-l) {
+            @content;
+    }
+}
+    @else if $break == "xl" {
+        @media (min-width: $break-xl) {
+            @content;
+}
+}
+}
