@@ -1,0 +1,44 @@
+#emailSectionContainer {
+    width: 50%;
+    height: 100%;
+    color: white;
+    padding-left: 20px;
+
+    .topSection {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+    }
+
+    .midSection {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+        #emailOptions {
+            margin-bottom: 50px;
+            background-color: transparent;
+            color: $senary;
+            border: none;
+        }
+
+        #assignedImageContainer {
+            display: flex;
+            flex-wrap: wrap;
+            width: 100%;
+            gap: 20px;
+            
+            img {
+                height: 150px;
+                width: 150px;
+                margin-right: 20px;
+                margin-bottom: 16px;
+                border-radius: 4px;
+            }
+            @include mq("xl") {
+                height: 906px;
+            }
+        }
+    }
+}

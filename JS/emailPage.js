@@ -30,9 +30,19 @@ addImageButton.addEventListener("click", function() {
         let emailObjectIndex = emailList.findIndex(emailObj => emailObj.email === emailOptionsMenu.value); 
         emailList[emailObjectIndex].assignedImages.push(currentImage);
         console.log(emailList[emailObjectIndex].assignedImages);
+        displayImages();
     }
 });
 
-emailOptionsMenu.addEventListener("change", function() {   
+function displayImages() {
+    let emailObjectIndex = emailList.findIndex(emailObj => emailObj.email === emailOptionsMenu.value);
+    emailList[emailObjectIndex].assignedImages.forEach(img => {
+        userImageSection.appendChild(img);
+    }); 
+}
 
+
+emailOptionsMenu.addEventListener("change", function() {   
+    userImageSection.innerHTML = "";
+    displayImages();
 });
