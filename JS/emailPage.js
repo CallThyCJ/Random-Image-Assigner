@@ -6,6 +6,8 @@ const userImageSection = document.getElementById("assignedImages");
 const imageContainer = document.getElementById("assignedImageContainer");
 const prevButton = document.getElementById("prevPage");
 const nextButton = document.getElementById("nextPage");
+let imageIndex = 0;
+let imageLimit = 9;
 let currentViewingPage = 1; 
 
 let emailList = [];
@@ -15,6 +17,7 @@ class emailEntry {
     constructor(email) {
         this.email = email;
         this.assignedImages = [];
+        this.imagesToDisplay = [];
     }
 }
 
@@ -33,52 +36,25 @@ addImageButton.addEventListener("click", function() {
         console.log("Insert Warning Message Here");
     } else {
         let emailObjectIndex = emailList.findIndex(emailObj => emailObj.email === emailOptionsMenu.value); 
-        emailList[emailObjectIndex].assignedImages.push(currentImage);
+        emailList[emailObjectIndex].assignedImages.push(currentImage.src);
         console.log(emailList[emailObjectIndex].assignedImages);
         displayImages();
     }
+
 });
 
 function displayImages() {
     userImageSection.innerHTML = "";
     
-    let currentPageIndex = 1;
     let emailObjectIndex = emailList.findIndex(emailObj => emailObj.email === emailOptionsMenu.value);
     let selectedEmail = emailList[emailObjectIndex];
-
-    selectedEmail[`page${currentPageIndex}`] = [];
-
-    selectedEmail.assignedImages.forEach(img => {
-        userImageSection.appendChild(img);
-
-        // Detect if image is out of container
-        const containerRect = userImageSection.getBoundingClientRect();
-        const imgRect = img.getBoundingClientRect();
-
-        if (imgRect.right > containerRect.right || imgRect.bottom > containerRect.bottom) {
-            userImageSection.removeChild(img);
-            currentPageIndex++;
-            selectedEmail[`page${currentPageIndex}`] = [];
-
-            selectedEmail[`page${currentPageIndex}`].push(img);
-        } else {
-            selectedEmail[`page${currentPageIndex}`].push(img);
-        }
-    });
-    currentViewingPage = 1;
-    displayPage(selectedEmail, currentViewingPage); 
-}
-
-function displayPage(emailEntry, pageNumber) {
-    userImageSection.innerHTML = "";
-
-    if (!emailEntry[`page${pageNumber}`]) return;
-
-    emailEntry[`page${pageNumber}`].forEach(img => {
-        userImageSection.appendChild(img);    
-});
-}
-
+    for (let i = imageIndex; i < imageLimit && i < selectedEmail.assignedImages.length; i++) {
+        let img = document.createElement('img');
+        img.src = selectedEmail.assignedImages[i];
+        userImageSection.appendChild(img);  
+    }
+        
+    };
 
 emailOptionsMenu.addEventListener("change", function() {   
     userImageSection.innerHTML = "";
@@ -86,16 +62,23 @@ emailOptionsMenu.addEventListener("change", function() {
 });
 
 prevButton.addEventListener("click", function () {
-    if (currentViewingPage > 1) {
-        currentViewingPage--;
-        displayPage(emailList.find(emailObj => emailObj.email === emailOptionsMenu.value), currentViewingPage);
+    if (imageIndex === 0) {
+        console.log("No previous page avaiable");
+    } else {
+        imageIndex = imageIndex - 9;
+        imageLimit = imageLimit - 9;
+        displayImages();
     }
 });
 
 nextButton.addEventListener("click", function () {
-    let selectedEmailEntry = emailList.find(emailObj => emailObj.email === emailOptionsMenu.value);
-    if (selectedEmailEntry[`page${currentViewingPage + 1}`]) {
-        currentViewingPage++;
-        displayPage(selectedEmailEntry, currentViewingPage);
+    let emailObjectIndex = emailList.findIndex(emailObj => emailObj.email === emailOptionsMenu.value);
+    let selectedEmail = emailList[emailObjectIndex];
+    if (imageLimit >= selectedEmail.assignedImages.length) {
+        console.log("NO");
+    } else {
+        imageIndex = imageIndex + 9;
+        imageLimit = imageLimit + 9;
+        displayImages();
     }
 }); 
