@@ -51,6 +51,7 @@ function displayImages() {
     selectedEmail.assignedImages.forEach(img => {
         userImageSection.appendChild(img);
 
+        // Detect if image is out of container
         const containerRect = userImageSection.getBoundingClientRect();
         const imgRect = img.getBoundingClientRect();
 
