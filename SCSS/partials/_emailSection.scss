@@ -8,6 +8,11 @@
         width: 100%;
         display: flex;
         justify-content: center;
+
+        h2 {
+            font-size: 2.4rem;
+            margin-top: 14px;
+        }
     }
 
     .midSection {
@@ -21,7 +26,14 @@
             background-color: transparent;
             color: $senary;
             border: none;
+
+            option {
+                background-color: transparent;
+                color: $senary;
+            }
         }
+
+        
 
         #assignedImageContainer {
             display: flex;
@@ -39,6 +51,35 @@
             @include mq("xl") {
                 height: 906px;
             }
+
+            #assignedImages {
+                height: 100%;
+                max-height: 100%;
+                width: 100%;
+                max-width: 100%;
+            }
+        }
+    }
+
+    .bottomSection {
+        #userEmail {
+            height: 35px;
+            width: 350px;
+            background-color: transparent;
+            border: solid $senary 3px;
+            color: white;
+            border-radius: 3px;
+
+            &:focus {
+             outline-color: $quaternary;   
+            }
+        }
+
+        #submitEmail {
+            height: 35px;
+            background-color: $senary;
+            border: 0;
+            border-radius: 3px;
         }
     }
 }

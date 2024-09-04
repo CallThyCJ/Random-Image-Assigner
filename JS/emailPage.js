@@ -2,7 +2,12 @@ const addEmailButton = document.getElementById("submitEmail");
 const addImageButton = document.getElementById("assignButton");
 const emailInput = document.getElementById("userEmail");
 const emailOptionsMenu = document.getElementById("emailOptions");
-const userImageSection = document.getElementById("assignedImages"); 
+const userImageSection = document.getElementById("assignedImages");
+const imageContainer = document.getElementById("assignedImageContainer");
+const prevButton = document.getElementById("prevPage");
+const nextButton = document.getElementById("nextPage");
+let currentViewingPage = 1; 
+
 let emailList = [];
 
 class emailEntry {
@@ -35,10 +40,42 @@ addImageButton.addEventListener("click", function() {
 });
 
 function displayImages() {
+    userImageSection.innerHTML = "";
+    
+    let currentPageIndex = 1;
     let emailObjectIndex = emailList.findIndex(emailObj => emailObj.email === emailOptionsMenu.value);
-    emailList[emailObjectIndex].assignedImages.forEach(img => {
+    let selectedEmail = emailList[emailObjectIndex];
+
+    selectedEmail[`page${currentPageIndex}`] = [];
+
+    selectedEmail.assignedImages.forEach(img => {
         userImageSection.appendChild(img);
-    }); 
+
+        const containerRect = userImageSection.getBoundingClientRect();
+        const imgRect = img.getBoundingClientRect();
+
+        if (imgRect.right > containerRect.right || imgRect.bottom > containerRect.bottom) {
+            userImageSection.removeChild(img);
+            currentPageIndex++;
+            selectedEmail[`page${currentPageIndex}`] = [];
+
+            selectedEmail[`page${currentPageIndex}`].push(img);
+        } else {
+            selectedEmail[`page${currentPageIndex}`].push(img);
+        }
+    });
+    currentViewingPage = 1;
+    displayPage(selectedEmail, currentViewingPage); 
+}
+
+function displayPage(emailEntry, pageNumber) {
+    userImageSection.innerHTML = "";
+
+    if (!emailEntry[`page${pageNumber}`]) return;
+
+    emailEntry[`page${pageNumber}`].forEach(img => {
+        userImageSection.appendChild(img);    
+});
 }
 
 
@@ -46,3 +83,18 @@ emailOptionsMenu.addEventListener("change", function() {
     userImageSection.innerHTML = "";
     displayImages();
 });
+
+prevButton.addEventListener("click", function () {
+    if (currentViewingPage > 1) {
+        currentViewingPage--;
+        displayPage(emailList.find(emailObj => emailObj.email === emailOptionsMenu.value), currentViewingPage);
+    }
+});
+
+nextButton.addEventListener("click", function () {
+    let selectedEmailEntry = emailList.find(emailObj => emailObj.email === emailOptionsMenu.value);
+    if (selectedEmailEntry[`page${currentViewingPage + 1}`]) {
+        currentViewingPage++;
+        displayPage(selectedEmailEntry, currentViewingPage);
+    }
+}); 
