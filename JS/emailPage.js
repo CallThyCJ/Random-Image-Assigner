@@ -24,6 +24,7 @@ class emailEntry {
 //Add email to email selection
 addEmailButton.addEventListener("click", function() {
     let emailValue = emailInput.value.trim();
+    const warning = document.querySelector("#emailWarning");
     const emailRegex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
     if (emailRegex.test(emailValue)) {
         let userEmail = new emailEntry (emailValue);
@@ -32,16 +33,26 @@ addEmailButton.addEventListener("click", function() {
         option.value = emailValue;
         option.textContent = emailValue;
         emailOptionsMenu.appendChild(option);
+        warning.style.display = "none";
     }else{
+        warning.style.display = "block";
+        
         console.log("enter a valid email");
     }
 });
 
 //Add image to user's collection
 addImageButton.addEventListener("click", function() {
+    const warning = document.getElementById("imageWarning"); 
+    const noEmailWarning = document.getElementById("noEmailWarning");
+    
     if (emailOptionsMenu.value === "" || emailOptionsMenu.value === "disabled") {
+        noEmailWarning.style.display = "block";
         console.log("Insert Warning Message Here");
+        
     } else {
+        noEmailWarning.style.display = "none";
+
         let emailObjectIndex = emailList.findIndex(emailObj => emailObj.email === emailOptionsMenu.value);
         
         const imgExists = emailList[emailObjectIndex].assignedImages.some(img => img === currentImage.src);
@@ -51,8 +62,10 @@ addImageButton.addEventListener("click", function() {
             emailList[emailObjectIndex].assignedImages.push(currentImage.src);
             console.log(emailList[emailObjectIndex].assignedImages);
             displayImages();
+            warning.style.display = "none";
         } else {
-            console.log ("image already in the email collection")
+            warning.style.display = "block";
+            console.log("image already in collection");
         }
         
     }

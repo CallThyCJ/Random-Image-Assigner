@@ -1,8 +1,12 @@
 #emailSectionContainer {
-    width: 50%;
+    width: 100%;
     height: 100%;
     color: white;
-    padding-left: 20px;
+
+    @include mq("l") {
+        width: 50%;
+        padding-left: 20px;
+    }
 
     .topSection {
         width: 100%;
@@ -10,8 +14,13 @@
         justify-content: center;
 
         h2 {
-            font-size: 2.4rem;
-            margin-top: 14px;
+            @include mq("m") {
+                font-size: 1.8rem;
+                margin-top: 14px;
+            }
+            @include mq("l") {
+                font-size: 2.4rem;
+            }
         }
     }
 
@@ -26,6 +35,12 @@
             background-color: transparent;
             color: $senary;
             border: none;
+            @include mq("l") {
+                font-size: 1.3rem;
+            }
+            @include mq("xl") {
+                margin-bottom: 20.800px;
+            }
 
             option {
                 background-color: transparent;
@@ -40,16 +55,44 @@
             flex-wrap: wrap;
             width: 100%;
             gap: 20px;
-            
-            img {
-                height: 150px;
-                width: 150px;
-                margin-right: 20px;
-                margin-bottom: 16px;
-                border-radius: 4px;
+            max-height: 506px;
+            @include mq("l") {
+                height: 806px;
+                max-height: 806px;
             }
             @include mq("xl") {
                 height: 906px;
+                max-height: 906px;
+            }
+
+            #assignedImages {
+                @include mq("m") {
+                    display: flex;
+                    flex-wrap: wrap;
+                    column-gap: 20px;
+                    row-gap: 10px;
+                }
+                @include mq("l") {
+                    column-gap: 20px;
+                    row-gap: 10px;
+                    align-content: flex-start;
+                }
+            }
+            
+            img {
+                height: 93px;
+                width: 93px;
+                margin-bottom: 16px;
+                border-radius: 4px;
+                @include mq("l") {
+                    height: 140px;
+                    width: 140px;
+                    margin-bottom: 0;
+                }
+                @include mq("xl") {
+                    height: 181px;
+                    width: 181px;
+                }
             }
 
             #assignedImages {
@@ -62,13 +105,57 @@
     }
 
     .bottomSection {
+        width: 100%;
+
+        #emailCollectionContainer {
+            @include mq("m") {
+                display: flex;
+                flex-direction: column;
+                width: 100%;
+            } 
+            #pageButtonContainer {
+                @include mq("l") {
+                    margin-top: 12px;
+                }
+            }
+        }
+
+        h3 {
+            @include mq("m") {
+                font-size: 1.4rem;
+                align-self: center;
+            }
+            @include mq("l") {
+                font-size: 1.2rem;
+                margin-top: 30px;
+                margin-bottom: 5px;
+            }
+        }
+
         #userEmail {
             height: 35px;
-            width: 350px;
+            width: 320px;
             background-color: transparent;
             border: solid $senary 3px;
             color: white;
             border-radius: 3px;
+            margin-bottom: 20px;
+
+            @include mq("m") {
+                width: 550px;
+                margin-left: auto;
+                margin-right: auto;
+                margin-top: 20px;
+            }
+            @include mq("l") {
+                margin-top: 5px;
+                width: 350px;
+                margin-bottom: 0;
+            }
+            @include mq("xl") {
+                width: 500px;
+            }
+            
 
             &:focus {
              outline-color: $quaternary;   
@@ -80,6 +167,19 @@
             background-color: $senary;
             border: 0;
             border-radius: 3px;
+            @include mq("m") {
+                width: 150px;
+                align-self: center;
+            }
+            @include mq("l") {
+                width: 100px;
+                height: 25px;
+                margin-top: 8px;    
+            }
+        }
+
+        h4 {
+            display: none;
         }
     }
 }

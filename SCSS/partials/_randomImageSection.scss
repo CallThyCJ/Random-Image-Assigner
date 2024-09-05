@@ -1,8 +1,15 @@
 #randomImageContainer {
-    width: 50%;
+    width: 100%;
     height: 100%;
-    border-right: solid 6px $tertiary;
     color: white;
+    border-bottom: solid 6px $tertiary;
+
+    @include mq("l") {
+        border-right: solid 6px $tertiary;
+        width: 50%;
+        border-bottom: none;
+        padding-right: 25px;
+    }
 
     button {
         background-color: $senary;
@@ -16,21 +23,28 @@
         justify-content: center;
 
         h2 {
-            text-decoration: underline 4px $secondary;
             position: relative;
-            font-size: 2.4rem;
+            font-size: 1.8rem;
             margin-top: 14px;
+            @include mq("l") {
+                font-size: 2.4rem;
+            }
         }
 
         h2::after {
             content: "";
             position: absolute;
-            left: -25px; 
-            right: -25px; 
-            bottom: 0; 
+            left: -12px; 
+            right: -12px; 
+            bottom: -7px; 
             height: 4px; 
             background-color: $secondary; 
             z-index: -1;
+            @include mq("l") {
+                left: -16px; 
+                right: -16px; 
+                bottom: -14px; 
+            }
         }
     }
 
@@ -41,15 +55,28 @@
         align-items: center;
         margin-top: 10px;
         @include mq("xl") {
-            margin-bottom: 50px;
+            margin-bottom: 20px;
         }
 
         h3 {
             margin-top: 0;
+            @include mq("l") {
+                font-size: 1.3rem;
+            }
         }
 
         #imageContainer {
-            height: 906px;
+            height: 506px;
+
+            @include mq("m") {
+                height: 706px;
+            }
+            @include mq("l") {
+                height: 806px;
+            }
+            @include mq("xl") {
+                height: 906px;
+            }
         }
 
         img {
@@ -57,16 +84,34 @@
             margin-left: auto;
             margin-right: auto;
             object-fit: cover;
+            height: 506px;
+            width: 330px;
+            @include mq("m") {
+                height: 706px;
+                width: 650px;
+            }
+            @include mq("l") {
+                height: 806px;
+                width: 465px;
+            }
             @include mq("xl") {
-                height: 880px;
-                width: 786px;
+                height: 906px;
+                width: 574px;
             }
         }
 
         #getImage {
+            margin-top: 20px;
+            width: 200px;
+            height: 50px;
+            @include mq("l") {
+                margin-bottom: 40px;
+                height: 60px;
+                width: 250px;
+            }
             @include mq("xl") {
                 width: 300px;
-                height: 60px;
+                margin-bottom: 20px;
             }
         }
     }
@@ -76,5 +121,18 @@
     #assignButton {
         width: 160px;
         height: 40px;
+        margin-top: 30px;
+        margin-bottom: 20px;
+
+        @include mq("l") {
+            margin-top: 0;
+            margin-bottom: 0;
+            width: 120px;
+            height: 40px;
+        } 
+    }
+
+    h4 {
+        display: none;
     }
 }

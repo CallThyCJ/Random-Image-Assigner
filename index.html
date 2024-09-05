@@ -4,6 +4,7 @@
 <head>
     <link rel="stylesheet" href="css/normalize.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+    <script src="https://kit.fontawesome.com/ecb3190b9d.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="css/style.css">
 </head>
 
@@ -29,7 +30,8 @@
 
             <div class="bottomSection">
                 <button id="assignButton">Assign Image</button>
-                <h4>This image is already in your collection</h4>
+                <h4 id="imageWarning" class="warning"><i class="fa-solid fa-circle-exclamation"></i> This image is already in your collection</h4>
+                <h4 id="noEmailWarning" class="warning"><i class="fa-solid fa-circle-exclamation"></i> There is no email selected</h4>
             </div>
         </div>
 
@@ -59,7 +61,7 @@
                     <h3>Add An Email</h3>
                      <input type="email" id="userEmail">
                      <button id="submitEmail">Add Email</button>  
-                    <h4 id="emailWarning" class="warning">Please enter a valid email address</h4>     
+                    <h4 id="emailWarning" class="warning"><i class="fa-solid fa-circle-exclamation"></i> Please enter a valid email address</h4>     
                 </div>
             </div>
 
