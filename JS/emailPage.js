@@ -21,28 +21,45 @@ class emailEntry {
     }
 }
 
+//Add email to email selection
 addEmailButton.addEventListener("click", function() {
     let emailValue = emailInput.value.trim();
-    let userEmail = new emailEntry (emailValue);
-    emailList.push(userEmail);
-    let option = document.createElement("option");
-    option.value = emailValue;
-    option.textContent = emailValue;
-    emailOptionsMenu.appendChild(option);
+    const emailRegex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+    if (emailRegex.test(emailValue)) {
+        let userEmail = new emailEntry (emailValue);
+        emailList.push(userEmail);
+        let option = document.createElement("option");
+        option.value = emailValue;
+        option.textContent = emailValue;
+        emailOptionsMenu.appendChild(option);
+    }else{
+        console.log("enter a valid email");
+    }
 });
 
+//Add image to user's collection
 addImageButton.addEventListener("click", function() {
     if (emailOptionsMenu.value === "" || emailOptionsMenu.value === "disabled") {
         console.log("Insert Warning Message Here");
     } else {
-        let emailObjectIndex = emailList.findIndex(emailObj => emailObj.email === emailOptionsMenu.value); 
-        emailList[emailObjectIndex].assignedImages.push(currentImage.src);
-        console.log(emailList[emailObjectIndex].assignedImages);
-        displayImages();
+        let emailObjectIndex = emailList.findIndex(emailObj => emailObj.email === emailOptionsMenu.value);
+        
+        const imgExists = emailList[emailObjectIndex].assignedImages.some(img => img === currentImage.src);
+
+//Check to see if image is already in the email collection
+        if (!imgExists) {
+            emailList[emailObjectIndex].assignedImages.push(currentImage.src);
+            console.log(emailList[emailObjectIndex].assignedImages);
+            displayImages();
+        } else {
+            console.log ("image already in the email collection")
+        }
+        
     }
 
 });
 
+//Append user images to image container
 function displayImages() {
     userImageSection.innerHTML = "";
     
@@ -56,11 +73,13 @@ function displayImages() {
         
     };
 
+//Detect if email has changed and display new email's images    
 emailOptionsMenu.addEventListener("change", function() {   
     userImageSection.innerHTML = "";
     displayImages();
 });
 
+//Show previous images in the array
 prevButton.addEventListener("click", function () {
     if (imageIndex === 0) {
         console.log("No previous page avaiable");
@@ -71,6 +90,7 @@ prevButton.addEventListener("click", function () {
     }
 });
 
+//Show next images in the array
 nextButton.addEventListener("click", function () {
     let emailObjectIndex = emailList.findIndex(emailObj => emailObj.email === emailOptionsMenu.value);
     let selectedEmail = emailList[emailObjectIndex];
