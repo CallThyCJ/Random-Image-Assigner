@@ -141,7 +141,17 @@
                     margin-top: 12px;
                 }
             }
+
+            #submitEmailContainer {
+                display: flex;
+                column-gap: 20px;
+                @include mq("m") {
+                    justify-content: center;
+                    row-gap: 20px;
+                }
+            }
         }
+        
 
         h3 {
             @include mq("m") {
@@ -200,6 +210,7 @@
 
         h4 {
             display: none;
+            margin: 0;
         }
     }
 }
