@@ -4,7 +4,7 @@ const container = document.getElementById("imageContainer");
 const getImageButton = document.getElementById("getImage");
 let currentImage;
 
-getImageButton.addEventListener("click", function() {
+function generateRandomImage () {
     container.innerHTML = "";
 
     const img = document.createElement("img");
@@ -14,4 +14,12 @@ getImageButton.addEventListener("click", function() {
     currentImage = img;
 
     container.appendChild(img);
+}
+
+getImageButton.addEventListener("click", function() {
+    generateRandomImage();
 })
+
+window.onload = () => {
+    generateRandomImage();
+}

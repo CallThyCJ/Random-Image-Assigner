@@ -6,9 +6,12 @@ const userImageSection = document.getElementById("assignedImages");
 const imageContainer = document.getElementById("assignedImageContainer");
 const prevButton = document.getElementById("prevPage");
 const nextButton = document.getElementById("nextPage");
+const currentPage = document.getElementById("currentPage");
+const totalPages = document.getElementById("totalPages");
 let imageIndex = 0;
 let imageLimit = 9;
-let currentViewingPage = 1; 
+let currentViewingPage = 1;
+let currentTotalPages = 1; 
 
 let emailList = [];
 
@@ -19,6 +22,12 @@ class emailEntry {
         this.assignedImages = [];
         this.imagesToDisplay = [];
     }
+}
+
+//email pages numbers
+window.onload = () => {
+    currentPage.innerText = currentViewingPage.toString();
+    totalPages.innerText = currentTotalPages.toString();
 }
 
 //Add email to email selection
@@ -42,6 +51,7 @@ addEmailButton.addEventListener("click", function() {
         option.value = emailValue;
         option.textContent = emailValue;
         emailOptionsMenu.appendChild(option);
+        emailOptionsMenu.value = emailValue;
         warning.style.display = "none";
         dupWarning.style.display = "none";
     }else{
@@ -66,6 +76,12 @@ addImageButton.addEventListener("click", function() {
         let emailObjectIndex = emailList.findIndex(emailObj => emailObj.email === emailOptionsMenu.value);
         
         const imgExists = emailList[emailObjectIndex].assignedImages.some(img => img === currentImage.src);
+
+//generate total page number
+        if (emailList[emailObjectIndex].assignedImages.length > 9) {
+            currentTotalPages = emailList[emailObjectIndex].assignedImages.length / 9;
+            totalPages.innerText = Math.ceil(currentTotalPages).toString();
+        }
 
 //Check to see if image is already in the email collection
         if (!imgExists) {
@@ -110,6 +126,8 @@ prevButton.addEventListener("click", function () {
         imageIndex = imageIndex - 9;
         imageLimit = imageLimit - 9;
         displayImages();
+        currentViewingPage--;
+        currentPage.innerText = currentViewingPage.toString();
     }
 });
 
@@ -123,5 +141,7 @@ nextButton.addEventListener("click", function () {
         imageIndex = imageIndex + 9;
         imageLimit = imageLimit + 9;
         displayImages();
+        currentViewingPage++;
+        currentPage.innerText = currentViewingPage.toString();
     }
 }); 

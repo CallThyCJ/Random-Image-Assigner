@@ -129,6 +129,12 @@
         } 
     }
 
+    #pageNumber {
+        display: flex;
+        gap: 10px;
+        font-size: 1.2rem;
+    }
+
     h4 {
         display: none;
         align-self: center;
