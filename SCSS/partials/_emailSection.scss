@@ -8,18 +8,40 @@
         padding-left: 20px;
     }
 
+    button {
+        background-image: linear-gradient(to right, #1FA2FF 0%, #12D8FA  51%, #1FA2FF  100%);;
+        border-image: linear-gradient(to right, #4776E6 0%, #8E54E9  51%, #4776E6  100%) 1;
+    }
+
     .topSection {
         width: 100%;
         display: flex;
         justify-content: center;
 
         h2 {
+            position: relative;
             @include mq("m") {
                 font-size: 1.8rem;
                 margin-top: 14px;
             }
             @include mq("l") {
                 font-size: 2.4rem;
+            }
+        }
+
+        h2::after {
+            content: "";
+            position: absolute;
+            left: -12px; 
+            right: -12px; 
+            bottom: -7px; 
+            height: 4px; 
+            background-color: $quaternary; 
+            z-index: -1;
+            @include mq("l") {
+                left: -16px; 
+                right: -16px; 
+                bottom: -14px; 
             }
         }
     }
@@ -46,6 +68,10 @@
                 background-color: transparent;
                 color: $senary;
             }
+
+            &:active, &:hover {
+                outline: none;
+            } 
         }
 
         
@@ -59,10 +85,6 @@
             @include mq("l") {
                 height: 806px;
                 max-height: 806px;
-            }
-            @include mq("xl") {
-                height: 906px;
-                max-height: 906px;
             }
 
             #assignedImages {
@@ -164,9 +186,6 @@
 
         #submitEmail {
             height: 35px;
-            background-color: $senary;
-            border: 0;
-            border-radius: 3px;
             @include mq("m") {
                 width: 150px;
                 align-self: center;

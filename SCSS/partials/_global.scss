@@ -32,3 +32,7 @@ body {
 .activateWarning {
     display: block;
 }
+
+button:hover, #emailOptions:hover {
+    cursor: pointer;
+}

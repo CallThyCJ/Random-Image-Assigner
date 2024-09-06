@@ -25,7 +25,16 @@ class emailEntry {
 addEmailButton.addEventListener("click", function() {
     let emailValue = emailInput.value.trim();
     const warning = document.querySelector("#emailWarning");
+    const dupWarning = document.getElementById("dupEmailWarning");
     const emailRegex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+    
+    for (let i = 0; i < emailList.length; i++) {
+        if (emailValue === emailList[i].email) {
+            dupWarning.style.display = "block";  
+            return console.log ("email is already entered");
+        }
+    }
+
     if (emailRegex.test(emailValue)) {
         let userEmail = new emailEntry (emailValue);
         emailList.push(userEmail);
@@ -34,6 +43,7 @@ addEmailButton.addEventListener("click", function() {
         option.textContent = emailValue;
         emailOptionsMenu.appendChild(option);
         warning.style.display = "none";
+        dupWarning.style.display = "none";
     }else{
         warning.style.display = "block";
         

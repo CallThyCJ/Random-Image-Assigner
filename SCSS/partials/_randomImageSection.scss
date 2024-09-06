@@ -12,8 +12,9 @@
     }
 
     button {
-        background-color: $senary;
-        border: none;
+        background-image: linear-gradient(to right, #1FA2FF 0%, #12D8FA  51%, #1FA2FF  100%);
+        border: solid 2px;
+        border-image: linear-gradient(to right, #4776E6 0%, #8E54E9  51%, #4776E6  100%) 1;
         border-radius: 5px;
     }
 
@@ -38,7 +39,7 @@
             right: -12px; 
             bottom: -7px; 
             height: 4px; 
-            background-color: $secondary; 
+            background-color: $quaternary; 
             z-index: -1;
             @include mq("l") {
                 left: -16px; 
@@ -74,9 +75,6 @@
             @include mq("l") {
                 height: 806px;
             }
-            @include mq("xl") {
-                height: 906px;
-            }
         }
 
         img {
@@ -95,7 +93,6 @@
                 width: 465px;
             }
             @include mq("xl") {
-                height: 906px;
                 width: 574px;
             }
         }
@@ -134,5 +131,6 @@
 
     h4 {
         display: none;
+        align-self: center;
     }
 }

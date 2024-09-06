@@ -7,11 +7,14 @@
     color: white;
 
     h1 {
-        margin-left: 7px;
-        font-size: 1.4rem;
+        margin-left: auto;
+        margin-right: auto;
+        font-size: 2.2rem;
         @include mq("l") {
-            font-size: 32px;
-            margin-left: auto;
+            font-size: 2.6rem;
+        }
+        @include mq("xl") {
+            font-size: 2.9rem;
         }
     }
 
