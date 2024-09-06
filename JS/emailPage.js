@@ -8,10 +8,7 @@ const prevButton = document.getElementById("prevPage");
 const nextButton = document.getElementById("nextPage");
 const currentPage = document.getElementById("currentPage");
 const totalPages = document.getElementById("totalPages");
-let imageIndex = 0;
-let imageLimit = 9;
-let currentViewingPage = 1;
-let currentTotalPages = 1; 
+const initalPages = 1
 
 let emailList = [];
 
@@ -21,13 +18,18 @@ class emailEntry {
         this.email = email;
         this.assignedImages = [];
         this.imagesToDisplay = [];
+        this.imageIndex = 0;
+        this.imageLimit = 9;
+        this.currentViewingPage = 1;
+        this.currentTotalPages = 1;
     }
 }
 
 //email pages numbers
 window.onload = () => {
-    currentPage.innerText = currentViewingPage.toString();
-    totalPages.innerText = currentTotalPages.toString();
+    currentPage.innerText = initalPages.toString();
+    totalPages.innerText = initalPages.toString();
+    generateRandomImage();
 }
 
 //Add email to email selection
@@ -52,6 +54,7 @@ addEmailButton.addEventListener("click", function() {
         option.textContent = emailValue;
         emailOptionsMenu.appendChild(option);
         emailOptionsMenu.value = emailValue;
+        changeUserImageCollection();
         warning.style.display = "none";
         dupWarning.style.display = "none";
     }else{
@@ -104,7 +107,7 @@ function displayImages() {
     
     let emailObjectIndex = emailList.findIndex(emailObj => emailObj.email === emailOptionsMenu.value);
     let selectedEmail = emailList[emailObjectIndex];
-    for (let i = imageIndex; i < imageLimit && i < selectedEmail.assignedImages.length; i++) {
+    for (let i = selectedEmail.imageIndex; i < selectedEmail.imageLimit && i < selectedEmail.assignedImages.length; i++) {
         let img = document.createElement('img');
         img.src = selectedEmail.assignedImages[i];
         userImageSection.appendChild(img);  
@@ -112,22 +115,37 @@ function displayImages() {
         
     };
 
-//Detect if email has changed and display new email's images    
-emailOptionsMenu.addEventListener("change", function() {   
+//Detect if email has changed and display new email's images 
+function changeUserImageCollection () {
+    let emailObjectIndex = emailList.findIndex(emailObj => emailObj.email === emailOptionsMenu.value);
+    let selectedEmail = emailList[emailObjectIndex];
     userImageSection.innerHTML = "";
     displayImages();
+    currentPage.innerText = selectedEmail.currentViewingPage.toString();
+    currentTotalPages = emailList[emailObjectIndex].assignedImages.length / 9;
+    if (currentTotalPages === 0) {
+        totalPages.innerText = initalPages;
+    } else {
+        totalPages.innerText = Math.ceil(currentTotalPages).toString();
+    } 
+}
+
+emailOptionsMenu.addEventListener("change", function() {   
+    changeUserImageCollection();
 });
 
 //Show previous images in the array
 prevButton.addEventListener("click", function () {
-    if (imageIndex === 0) {
+    let emailObjectIndex = emailList.findIndex(emailObj => emailObj.email === emailOptionsMenu.value);
+    let selectedEmail = emailList[emailObjectIndex];
+    if (selectedEmail.imageIndex === 0) {
         console.log("No previous page avaiable");
     } else {
-        imageIndex = imageIndex - 9;
-        imageLimit = imageLimit - 9;
+        selectedEmail.imageIndex = selectedEmail.imageIndex - 9;
+        selectedEmail.imageLimit = selectedEmail.imageLimit - 9;
         displayImages();
-        currentViewingPage--;
-        currentPage.innerText = currentViewingPage.toString();
+        selectedEmail.currentViewingPage--;
+        currentPage.innerText = selectedEmail.currentViewingPage.toString();
     }
 });
 
@@ -135,13 +153,13 @@ prevButton.addEventListener("click", function () {
 nextButton.addEventListener("click", function () {
     let emailObjectIndex = emailList.findIndex(emailObj => emailObj.email === emailOptionsMenu.value);
     let selectedEmail = emailList[emailObjectIndex];
-    if (imageLimit >= selectedEmail.assignedImages.length) {
+    if (selectedEmail.imageLimit >= selectedEmail.assignedImages.length) {
         console.log("NO");
     } else {
-        imageIndex = imageIndex + 9;
-        imageLimit = imageLimit + 9;
+        selectedEmail.imageIndex = selectedEmail.imageIndex + 9;
+        selectedEmail.imageLimit = selectedEmail.imageLimit + 9;
         displayImages();
-        currentViewingPage++;
-        currentPage.innerText = currentViewingPage.toString();
+        selectedEmail.currentViewingPage++;
+        currentPage.innerText = selectedEmail.currentViewingPage.toString();
     }
 }); 

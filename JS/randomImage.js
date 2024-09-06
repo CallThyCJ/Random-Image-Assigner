@@ -18,8 +18,4 @@ function generateRandomImage () {
 
 getImageButton.addEventListener("click", function() {
     generateRandomImage();
-})
-
-window.onload = () => {
-    generateRandomImage();
-}
+});
