@@ -197,6 +197,7 @@
 
         #submitEmail {
             height: 35px;
+            font-size: 0.8rem;
             @include mq("m") {
                 width: 150px;
                 align-self: center;
