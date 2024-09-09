@@ -88,10 +88,11 @@
             }
 
             #assignedImages {
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: center;
+                column-gap: 7px;
                 @include mq("m") {
-                    display: flex;
-                    flex-wrap: wrap;
-                    justify-content: center;
                     column-gap: 20px;
                     row-gap: 10px;
                 }
@@ -107,6 +108,11 @@
                 width: 93px;
                 margin-bottom: 16px;
                 border-radius: 4px;
+                @include mq("m") {
+                    height: 120px;
+                    width: 120px;
+                    margin-bottom: 0;
+                }
                 @include mq("l") {
                     height: 140px;
                     width: 140px;
