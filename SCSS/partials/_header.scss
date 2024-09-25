@@ -9,7 +9,10 @@
     h1 {
         margin-left: auto;
         margin-right: auto;
-        font-size: 2.2rem;
+        font-size: 1.9rem;
+        @include mq("s") {
+            font-size: 2.2rem;
+        }
         @include mq("l") {
             font-size: 2.6rem;
         }
