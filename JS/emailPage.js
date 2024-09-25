@@ -37,7 +37,7 @@ addEmailButton.addEventListener("click", function() {
     let emailValue = emailInput.value.trim();
     const warning = document.querySelector("#emailWarning");
     const dupWarning = document.getElementById("dupEmailWarning");
-    const emailRegex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+    const emailRegex = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|.(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     
     for (let i = 0; i < emailList.length; i++) {
         if (emailValue === emailList[i].email) {
@@ -49,6 +49,7 @@ addEmailButton.addEventListener("click", function() {
     if (emailRegex.test(emailValue)) {
         let userEmail = new emailEntry (emailValue);
         emailList.push(userEmail);
+        let topOfPage = document.querySelector("#emailImageSection");
         let option = document.createElement("option");
         option.value = emailValue;
         option.textContent = emailValue;
@@ -57,6 +58,8 @@ addEmailButton.addEventListener("click", function() {
         changeUserImageCollection();
         warning.style.display = "none";
         dupWarning.style.display = "none";
+        emailInput.value = "";
+        topOfPage.firstElementChild.scrollIntoView({ behavior: 'smooth' });
     }else{
         warning.style.display = "block";
         
