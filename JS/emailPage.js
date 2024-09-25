@@ -130,15 +130,21 @@ function changeUserImageCollection () {
     } 
 }
 
-emailOptionsMenu.addEventListener("change", function() {   
-    changeUserImageCollection();
+emailOptionsMenu.addEventListener("change", function() {
+    if (emailOptionsMenu.selectedIndex === 0) {
+        userImageSection.innerHTML = "";
+        currentPage.innerText = initalPages;
+        totalPages.innerText = initalPages;
+    } else {
+        changeUserImageCollection();
+    }   
 });
 
 //Show previous images in the array
 prevButton.addEventListener("click", function () {
     let emailObjectIndex = emailList.findIndex(emailObj => emailObj.email === emailOptionsMenu.value);
     let selectedEmail = emailList[emailObjectIndex];
-    if (selectedEmail.imageIndex === 0) {
+    if (emailOptionsMenu.selectedIndex === 0 || selectedEmail.imageIndex === 0) {
         console.log("No previous page avaiable");
     } else {
         selectedEmail.imageIndex = selectedEmail.imageIndex - 9;
@@ -153,7 +159,7 @@ prevButton.addEventListener("click", function () {
 nextButton.addEventListener("click", function () {
     let emailObjectIndex = emailList.findIndex(emailObj => emailObj.email === emailOptionsMenu.value);
     let selectedEmail = emailList[emailObjectIndex];
-    if (selectedEmail.imageLimit >= selectedEmail.assignedImages.length) {
+    if (emailOptionsMenu.selectedIndex === 0 || selectedEmail.imageLimit >= selectedEmail.assignedImages.length) {
         console.log("NO");
     } else {
         selectedEmail.imageIndex = selectedEmail.imageIndex + 9;
