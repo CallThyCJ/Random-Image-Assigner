@@ -130,10 +130,13 @@
         }
 
         #imageContainer {
-            height: 406px;
+            height: 286px;
 
-            @include mq("s") {
-                height: 506px;
+            @media screen and (min-width: 520px) {
+                height: 585px;
+            }
+            @include mq("smallmed") {
+                height: 576px;
             }
             @include mq("m") {
                 height: 706px;
@@ -148,11 +151,15 @@
             margin-left: auto;
             margin-right: auto;
             object-fit: cover;
-            height: 406px;
+            height: 286px;
             width: 230px;
-            @include mq("s") {
-                height: 506px;
-                width: 330px;
+            @media screen and (min-width: 520px) {
+                height: 585px;
+                width: 440px;
+            }
+            @include mq("smallmed") {
+                height: 576px;
+                width: 600px;
             }
             @include mq("m") {
                 height: 706px;
@@ -170,7 +177,10 @@
         #getImage {
             margin-top: 20px;
             width: 200px;
-            height: 50px;
+            height: 40px;
+            @include mq("smallmed") {
+                height: 50px;
+            }
             @include mq("l") {
                 margin-bottom: 40px;
                 height: 60px;
@@ -191,9 +201,13 @@
     align-items: center;
     #assignButton {
         width: 160px;
-        height: 40px;
-        margin-top: 30px;
+        height: 30px;
+        margin-top: 20px;
         margin-bottom: 20px;
+
+        @include mq("smallmed") {
+            height: 40px;
+        }
 
         @include mq("l") {
             margin-top: 0;

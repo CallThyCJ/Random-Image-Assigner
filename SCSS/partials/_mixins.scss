@@ -4,6 +4,12 @@
             @content;
     }
 } 
+
+    @else if $break == "smallmed" {
+        @media (min-width: $break-smallmed) {
+            @content;
+    }
+}
     @else if $break == "m" {
         @media (min-width: $break-m) {
             @content;
