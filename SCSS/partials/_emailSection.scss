@@ -9,13 +9,16 @@
     }
 
     button {
-        background-image: linear-gradient(to right, #1FA2FF 0%, #12D8FA  51%, #1FA2FF  100%);;
+        background-image: linear-gradient(to right, #1FA2FF 0%, #12D8FA  51%, #1FA2FF  100%);
         border-image: linear-gradient(to right, #4776E6 0%, #8E54E9  51%, #4776E6  100%) 1;
     }
 
     .topSection {
         width: 100%;
-        display: flex;
+        display: none;
+        @include mq("l") {
+            display: flex;
+        }
         justify-content: center;
 
         h2 {
@@ -52,12 +55,33 @@
         flex-direction: column;
         align-items: center;
 
+        .smallDeviceVersion {
+            position: relative;
+
+            @include mq("l") {
+                display: none;
+            }
+            
+            h2::after {
+                content: "";
+                position: absolute;
+                left: -12px; 
+                right: -12px; 
+                bottom: 12px; 
+                height: 4px; 
+                background-color: $quaternary; 
+                z-index: -1;
+            }
+        }
+
         #emailOptions {
+            display: none;
             margin-bottom: 50px;
             background-color: transparent;
             color: $senary;
             border: none;
             @include mq("l") {
+                display: block;
                 font-size: 1.3rem;
             }
             @include mq("xl") {
@@ -82,6 +106,7 @@
             width: 100%;
             gap: 20px;
             max-height: 506px;
+            min-height: 400px;
             @include mq("l") {
                 height: 806px;
                 max-height: 806px;
@@ -149,9 +174,14 @@
             }
 
             #submitEmailContainer {
-                display: flex;
+                display: none;
                 column-gap: 20px;
-                @include mq("m") {
+                // @include mq("m") {
+                //     justify-content: center;
+                //     row-gap: 20px;
+                // }
+                @include mq("l") {
+                    display: flex;
                     justify-content: center;
                     row-gap: 20px;
                 }
@@ -160,11 +190,14 @@
         
 
         h3 {
+            display: none;
+
             @include mq("m") {
                 font-size: 1.4rem;
                 align-self: center;
             }
             @include mq("l") {
+                display: block;
                 font-size: 1.2rem;
                 margin-top: 30px;
                 margin-bottom: 5px;
@@ -179,6 +212,7 @@
             color: white;
             border-radius: 3px;
             margin-bottom: 20px;
+            display: none;
 
             @include mq("m") {
                 width: 550px;
@@ -187,6 +221,7 @@
                 margin-top: 20px;
             }
             @include mq("l") {
+                display: block;
                 margin-top: 5px;
                 width: 350px;
                 margin-bottom: 0;

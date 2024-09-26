@@ -23,6 +23,66 @@
         display: flex;
         justify-content: center;
 
+        .largeDeviceVersion {
+            display: none;
+
+            @include mq("l") {
+                display: block;
+            }
+        }
+
+        .smallDeviceVersion {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+
+            #smallEmailOptions {
+                background-color: transparent;
+                color: $senary;
+                border: none;
+                margin-bottom: 30px;
+
+                option {
+                    background-color: transparent;
+                    color: $senary;
+                }
+
+                &:active, &:hover {
+                    outline: none;
+                } 
+            }
+
+            #addEmailItems {
+                display: flex;
+                flex-direction: row-reverse;
+
+                #smallSubmitEmail {
+                    border-top-right-radius: 0;
+                    border-bottom-right-radius: 0;
+                    border-right: 0;
+                }
+
+                #smallUserEmail {
+                    background-color: transparent;
+                    border: solid 3px;
+                    border-image: linear-gradient(to right, #4776E6 0%, #8E54E9  51%, #4776E6  100%) 1;
+                    border-left: 0;
+                    border-top-right-radius: 5px;
+                    border-bottom-right-radius: 5px;
+                    color: white;
+                }
+            }
+
+            h4 {
+                display: none;
+            }
+
+            @include mq("l") {
+                display: none;
+            }
+        }
+
         h2 {
             position: relative;
             margin-top: 14px;
@@ -70,8 +130,11 @@
         }
 
         #imageContainer {
-            height: 506px;
+            height: 406px;
 
+            @include mq("s") {
+                height: 506px;
+            }
             @include mq("m") {
                 height: 706px;
             }
@@ -85,8 +148,12 @@
             margin-left: auto;
             margin-right: auto;
             object-fit: cover;
-            height: 506px;
-            width: 330px;
+            height: 406px;
+            width: 230px;
+            @include mq("s") {
+                height: 506px;
+                width: 330px;
+            }
             @include mq("m") {
                 height: 706px;
                 width: 650px;
@@ -119,6 +186,7 @@
 
 .bottomSection {
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     #assignButton {
@@ -145,6 +213,7 @@
         display: none;
         align-self: center;
         font-size: 0.8rem;
+        margin-top: 0;
         @include mq("m") {
             font-size: 1rem;
         } 

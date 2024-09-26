@@ -1,7 +1,7 @@
 const addEmailButton = document.getElementById("submitEmail");
+const smallAddEmailButton = document.getElementById("smallSubmitEmail");
 const addImageButton = document.getElementById("assignButton");
-const emailInput = document.getElementById("userEmail");
-const emailOptionsMenu = document.getElementById("emailOptions");
+let emailOptionsMenu = document.getElementById("emailOptions");
 const userImageSection = document.getElementById("assignedImages");
 const imageContainer = document.getElementById("assignedImageContainer");
 const prevButton = document.getElementById("prevPage");
@@ -33,12 +33,31 @@ window.onload = () => {
 }
 
 //Add email to email selection
-addEmailButton.addEventListener("click", function() {
-    let emailValue = emailInput.value.trim();
-    const warning = document.querySelector("#emailWarning");
-    const dupWarning = document.getElementById("dupEmailWarning");
+function addEmailToMenu(event) {
+    let warning;
+    let dupWarning;
+    let emailInput;
     const emailRegex = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|.(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     
+    // check if email button has been clicked on small device breakpoint
+
+    if (event.target.id === "submitEmail") {
+        emailInput = document.getElementById("userEmail");
+        warning = document.querySelector("#emailWarning");
+        dupWarning = document.getElementById("dupEmailWarning");
+        emailOptionsMenu = document.getElementById("emailOptions");
+    } else if (event.target.id === "smallSubmitEmail") {
+        emailInput = document.getElementById("smallUserEmail");
+        warning = document.querySelector("#smallEmailWarning");
+        dupWarning = document.getElementById("smallDupEmailWarning");
+        emailOptionsMenu = document.getElementById("smallEmailOptions");
+        // console.log(emailInput);
+    }
+    
+    // add email to the menu
+
+    const emailValue = emailInput.value.trim(); 
+
     for (let i = 0; i < emailList.length; i++) {
         if (emailValue === emailList[i].email) {
             dupWarning.style.display = "block";  
@@ -65,7 +84,11 @@ addEmailButton.addEventListener("click", function() {
         
         console.log("enter a valid email");
     }
-});
+}
+
+addEmailButton.addEventListener("click", addEmailToMenu);
+smallAddEmailButton.addEventListener("click", addEmailToMenu);
+
 
 //Add image to user's collection
 addImageButton.addEventListener("click", function() {
@@ -74,7 +97,7 @@ addImageButton.addEventListener("click", function() {
     
     if (emailOptionsMenu.value === "" || emailOptionsMenu.value === "disabled") {
         noEmailWarning.style.display = "block";
-        console.log("Insert Warning Message Here");
+        // console.log("Insert Warning Message Here");
         
     } else {
         noEmailWarning.style.display = "none";
