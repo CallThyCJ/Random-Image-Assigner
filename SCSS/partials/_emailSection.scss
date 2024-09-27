@@ -185,6 +185,9 @@
                     justify-content: center;
                     row-gap: 20px;
                 }
+                @include mq("xl") {
+                    flex-direction: column;
+                }
             }
         }
         
@@ -199,7 +202,7 @@
             @include mq("l") {
                 display: block;
                 font-size: 1.2rem;
-                margin-top: 30px;
+                margin-top: 5px;
                 margin-bottom: 5px;
             }
         }
@@ -233,6 +236,10 @@
 
             &:focus {
              outline-color: $quaternary;   
+            }
+
+            &.warning {
+                border-color: red;
             }
         }
 

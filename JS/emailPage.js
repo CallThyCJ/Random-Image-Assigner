@@ -60,7 +60,8 @@ function addEmailToMenu(event) {
 
     for (let i = 0; i < emailList.length; i++) {
         if (emailValue === emailList[i].email) {
-            dupWarning.style.display = "block";  
+            dupWarning.style.display = "block";
+            emailInput.classList.add("warning");  
             return console.log ("email is already entered");
         }
     }
@@ -78,9 +79,11 @@ function addEmailToMenu(event) {
         warning.style.display = "none";
         dupWarning.style.display = "none";
         emailInput.value = "";
+        emailInput.classList.remove("warning");
         topOfPage.firstElementChild.scrollIntoView({ behavior: 'smooth' });
     }else{
         warning.style.display = "block";
+        emailInput.classList.add("warning");
         
         console.log("enter a valid email");
     }
