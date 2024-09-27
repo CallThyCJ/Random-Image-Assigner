@@ -9,15 +9,15 @@
     h1 {
         margin-left: auto;
         margin-right: auto;
-        font-size: 1.5rem;
+        font-size: 1.5rem !important;
         @include mq("s") {
-            font-size: 2.2rem;
+            font-size: 2.2rem !important ;
         }
         @include mq("l") {
-            font-size: 2.6rem;
+            font-size: 2.6rem !important;
         }
         @include mq("xl") {
-            font-size: 2.9rem;
+            font-size: 2.9rem !important;
         }
     }
 
