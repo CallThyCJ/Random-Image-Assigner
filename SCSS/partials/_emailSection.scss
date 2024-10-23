@@ -106,23 +106,6 @@
             align-items: center;
             margin-bottom: 30px;
 
-            #submitEmailContainer {
-                display: none;
-                column-gap: 20px;
-                // @include mq("m") {
-                //     justify-content: center;
-                //     row-gap: 20px;
-                // }
-                @include mq("l") {
-                    display: flex;
-                    justify-content: center;
-                    row-gap: 20px;
-                }
-                @include mq("xl") {
-                    flex-direction: column;
-                }
-            }
-
             #userEmail {
                 height: 35px;
                 width: 320px;
@@ -174,10 +157,24 @@
                     border-right: 0;
                 }
             }
-    
+        }
+
+        #submitEmailContainer {
+            display: none;
+            column-gap: 20px;
+
             h4 {
                 display: none;
                 margin: 0;
+            }
+
+            @include mq("l") {
+                display: flex;
+                justify-content: center;
+                row-gap: 20px;
+            }
+            @include mq("xl") {
+                flex-direction: column;
             }
         }
 
